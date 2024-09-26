@@ -12,6 +12,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LogIpMiddleware)
-      .forRoutes('*'); // Применяем middleware ко всем маршрутам
+      .forRoutes('*'); 
   }
 }
