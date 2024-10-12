@@ -1,4 +1,4 @@
-import { ISignInUserInput } from '../interface/sign-in-user.interface';
+import { ISignInUserInput } from '../interface/sign-in-user-response.interface';
 
 export class SignInUserInputDto implements ISignInUserInput {
   firstName: string;
