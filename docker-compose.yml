@@ -1,4 +1,3 @@
-
 version: '3.8'
 
 services:
@@ -12,7 +11,6 @@ services:
       - 27017:27017
     networks: 
       - mongo-database  
-
   mongo-express:
     image: mongo-express
     restart: always
@@ -21,16 +19,11 @@ services:
       ME_CONFIG_BASICAUTH_USERNAME: ${DATABASE_USERNAME}
       ME_CONFIG_BASICAUTH_PASSWORD: ${DATABASE_PASSWORD}
       ME_CONFIG_MONGODB_URL: mongodb://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@mongo:${DATABASE_PORT}/
-
   
     ports:
       - 8081:8081
     networks: 
       - mongo-database
-
 networks:  
   mongo-database:
     driver: bridge
-
-
-
