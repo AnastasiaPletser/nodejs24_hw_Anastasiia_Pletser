@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { createDatabaseService } from './factory/database-service.factory';
+import { createDatabaseServiceFactory } from './factory/database-service.factory';
 import { DBType } from './types/enums/database-type.enum';
 import { IAbstractDatabaseService } from './types/database-abstraction-service.interface';
 
@@ -14,7 +14,7 @@ export class DatabaseAbstractionModule {
         {
           provide: 'DATABASE_SERVICE',
           useFactory: (configService: ConfigService) =>
-            createDatabaseService(dbType, configService),
+            createDatabaseServiceFactory(dbType, configService),
           inject: [ConfigService],
         },
         {
