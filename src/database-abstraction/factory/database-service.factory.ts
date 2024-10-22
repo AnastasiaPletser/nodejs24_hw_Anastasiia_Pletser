@@ -1,11 +1,11 @@
 
 import { ConfigService } from '@nestjs/config';
 import { DBType } from '../types/enums/database-type.enum';
-import { IAbstractDatabaseService } from '../types/database-abstract-service.interface';
+import { IAbstractDatabaseService } from '../types/database-abstraction-service.interface';
 import { MongoDatabaseService } from './mongodb.service';
 import { PostgresDatabaseService } from './postgresdb.service';
 
-export const createDatabaseService = (
+export const createDatabaseServiceFactory = (
   dbType: DBType,
   configService: ConfigService,
 ): IAbstractDatabaseService => {
