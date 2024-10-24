@@ -7,9 +7,10 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { DatabaseAbstractionModule } from './database-abstraction/database-abstraction.module';
 import { DBType } from './database-abstraction/types/enums/database-type.enum';
+import { FilesModule } from './file/file.module'; 
 
 @Module({
-  imports: [UsersModule,  AuthModule, ConfigModule.forRoot(), DatabaseAbstractionModule.register(DBType.POSTGRES),],
+  imports: [UsersModule,  AuthModule, ConfigModule.forRoot(), DatabaseAbstractionModule.register(DBType.POSTGRES), FilesModule],
   controllers: [AppController],
   providers: [AppService],
 })
