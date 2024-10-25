@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"      
+      - "15672:15672"   
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  serviceA:
+    build:
+      context: ./http/serviceA
+    container_name: service_a
+    ports:
+      - "3000:3000"
+    networks:
+      - microservices_network
+
+  serviceB:
+    build:
+      context: ./http/serviceB
+    container_name: service_b
+    ports:
+      - "3001:3001"
+    networks:
+      - microservices_network
+
+
+  serviceC:
+    build:
+      context: ./queue/serviceC
+    container_name: service_c
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq
+    networks:
+      - microservices_network
+    depends_on:
+      - rabbitmq
+
+  serviceD:
+    build:
+      context: ./queue/serviceD
+    container_name: service_d
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq
+    networks:
+      - microservices_network
+    depends_on:
+      - rabbitmq
+
+networks:
+  microservices_network:
+    driver: bridge
